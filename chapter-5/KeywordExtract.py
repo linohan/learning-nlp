@@ -176,7 +176,9 @@ class TopicModel(object):
 
         for word in word_dic:
             single_list = [word]
+            #获取word在tfidf加权向量中的表示
             wordcorpus = self.tfidf_model[self.dictionary.doc2bow(single_list)]
+            #使用tfidf加权表示获取word对应的topic
             wordtopic = self.model[wordcorpus]
             wordtopic_dic[word] = wordtopic
         return wordtopic_dic
@@ -216,6 +218,7 @@ class TopicModel(object):
         for doc in doc_list:
             dictionary.extend(doc)
 
+        # 去重操作
         dictionary = list(set(dictionary))
 
         return dictionary
